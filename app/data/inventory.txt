@@ -1,0 +1,67 @@
+Atmospheric Gases	3,951	Moon Materials			197.55 m3	6,945,265.35 ISK
+Cadmium	403	Moon Materials			20.15 m3	3,809,075.40 ISK
+Caesarium Cadmide	204	Intermediate Materials			40.80 m3	1,977,367.92 ISK
+Caesium	206	Moon Materials			10.30 m3	1,230,926.22 ISK
+Carbon Polymers	107	Intermediate Materials			21.40 m3	489,981.89 ISK
+Ceramic Powder	213	Intermediate Materials			42.60 m3	710,131.35 ISK
+Chromium	206	Moon Materials			10.30 m3	2,165,570.88 ISK
+Cobalt	1,000	Moon Materials			50 m3	4,166,400.00 ISK
+Crystalline Carbonide	12,989	Composite			129.89 m3	1,867,818.20 ISK
+Crystallite Alloy	5	Intermediate Materials			1 m3	38,111.90 ISK
+Dysporite	102	Intermediate Materials			20.40 m3	2,230,441.14 ISK
+Dysprosium	304	Moon Materials			15.20 m3	11,619,889.28 ISK
+Evaporite Deposits	763	Moon Materials			38.15 m3	1,516,813.48 ISK
+Fermionic Condensates	188	Composite			244.40 m3	8,606,634.36 ISK
+Fernite Alloy	311	Intermediate Materials			62.20 m3	1,815,468.72 ISK
+Fernite Carbide	4,670	Composite			46.70 m3	515,708.10 ISK
+Ferrofluid	215	Intermediate Materials			43 m3	6,399,105.20 ISK
+Ferrogel	1,017	Composite			1,017 m3	27,435,069.99 ISK
+Fluxed Condensates	102	Intermediate Materials			20.40 m3	2,471,169.30 ISK
+Fullerides	2,384	Composite			357.60 m3	1,795,104.32 ISK
+Fullerite-C320	176	Harvestable Cloud			880 m3	6,698,083.04 ISK
+Fullerite-C50	620	Harvestable Cloud			621 m3	2,999,609.60 ISK
+Hafnium	304	Moon Materials			15.20 m3	5,540,679.68 ISK
+Heavy Water	84,404	Ice Product			33,761.60 m3	10,762,354.04 ISK
+Helium Fuel Block	75	Fuel Block			375 m3	1,332,813.00 ISK
+Hexite	322	Intermediate Materials			64.40 m3	4,828,367.46 ISK
+Hydrocarbons	402	Moon Materials			20.10 m3	1,474,178.22 ISK
+Hydrogen Fuel Block	50	Fuel Block			250 m3	867,977.50 ISK
+Hyperflurite	215	Intermediate Materials			43 m3	5,618,227.35 ISK
+Hypersynaptic Fibers	162	Composite			97.20 m3	1,023,415.56 ISK
+Liquid Ozone	48,775	Ice Product			19,510 m3	5,931,527.75 ISK
+Mercury	206	Moon Materials			10.30 m3	1,517,470.16 ISK
+Nanotransistors	1,050	Composite			262.50 m3	3,245,067.00 ISK
+Neo Mercurite	107	Intermediate Materials			21.40 m3	2,960,199.94 ISK
+Neodymium	206	Moon Materials			10.30 m3	8,908,235.16 ISK
+Nitrogen Fuel Block	70	Fuel Block			350 m3	1,214,822.00 ISK
+Oxygen Fuel Block	60	Fuel Block			300 m3	1,033,326.00 ISK
+Oxygen Isotopes	69,621	Ice Product			2,088.63 m3	41,111,200.50 ISK
+Phenolic Composites	1,118	Composite			223.60 m3	1,595,296.56 ISK
+Plasmonic Metamaterials	156	Composite			156 m3	1,941,950.40 ISK
+Platinum	206	Moon Materials			10.30 m3	3,315,909.90 ISK
+Platinum Technite	4	Intermediate Materials			0.80 m3	51,752.76 ISK
+Promethium	304	Moon Materials			15.20 m3	16,810,658.88 ISK
+Prometium	117	Intermediate Materials			23.40 m3	3,480,022.26 ISK
+Rolled Tungsten Alloy	102	Intermediate Materials			20.40 m3	1,101,923.34 ISK
+Scandium	207	Moon Materials			10.35 m3	705,027.51 ISK
+Silicates	108	Moon Materials			5.40 m3	280,239.48 ISK
+Silicon Diborite	307	Intermediate Materials			61.40 m3	1,022,973.12 ISK
+Solerium	200	Intermediate Materials			40 m3	1,477,734.00 ISK
+Strontium Clathrates	2,436	Ice Product			7,308 m3	6,973,366.68 ISK
+Sulfuric Acid	404	Intermediate Materials			80.80 m3	1,140,124.36 ISK
+Sylramic Fibers	3,411	Composite			170.55 m3	1,271,893.68 ISK
+Technetium	402	Moon Materials			20.10 m3	3,338,726.58 ISK
+Thulium	402	Moon Materials			20.10 m3	9,943,273.02 ISK
+Titanium	500	Moon Materials			25 m3	3,682,480.00 ISK
+Titanium Carbide	12,989	Composite			129.89 m3	2,002,903.80 ISK
+Titanium Chromide	5	Intermediate Materials			1 m3	51,559.50 ISK
+Tungsten	502	Moon Materials			25.10 m3	1,941,239.02 ISK
+Tungsten Carbide	2,989	Composite			29.89 m3	496,383.23 ISK
+Vanadium	11	Moon Materials			0.55 m3	69,876.40 ISK
+Vanadium Hafnite	102	Intermediate Materials			20.40 m3	1,404,350.28 ISK
+Isogen	125,836	Mineral			1,258.36 m3	73,212,643.16 ISK
+Megacyte	35,499	Mineral			354.99 m3	101,433,422.64 ISK
+Mexallon	762,104	Mineral			7,621.04 m3	45,650,029.60 ISK
+Morphite	6,406	Mineral			64.06 m3	252,611,385.36 ISK
+Nocxium	28,772	Mineral			287.72 m3	25,824,308.60 ISK
+Zydrine	34,490	Mineral			344.90 m3	79,316,653.00 ISK

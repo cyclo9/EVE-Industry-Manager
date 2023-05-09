@@ -9,14 +9,13 @@ class App:
     def __init__(self, root):
         # * root
         root.title('EVE Industry Manager')
-        # centers window
-        w = 550; h = 900
-        ws = root.winfo_screenwidth()
-        hs = root.winfo_screenheight()
-        x = (ws/2) - (w/2)
-        y = (hs/2) - (h/2)
-        root.geometry('%dx%d+%d+%d' % (w, h, x, y))
-        root.resizable(0, 0)
+
+        # Set the window dimensions and center it
+        width, height = 550, 550
+        x = (root.winfo_screenwidth() - width) // 2
+        y = (root.winfo_screenheight() - height) // 2
+        root.geometry("{}x{}+{}+{}".format(width, height, x, y))
+        # root.resizable(0, 0)
 
         # * mainframe
         mainframe = ttk.Frame(root)
@@ -27,6 +26,8 @@ class App:
         # * Notebook
         n = ttk.Notebook(mainframe)
         n.grid(column=0, row=0)
+        n.columnconfigure(0, weight=1)
+        n.rowconfigure(0, weight=1)
 
         # Manager
         n.add(Manager(n), text='Manager')

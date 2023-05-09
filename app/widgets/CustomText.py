@@ -25,4 +25,7 @@ class CustomText(tk.Text):
         if command in ('insert', 'delete', 'replace'):
             self.event_generate('<<TextModified>>')
 
+        if command in ('insert'):
+            self.event_generate('<<TextInsert>>')
+
         return result

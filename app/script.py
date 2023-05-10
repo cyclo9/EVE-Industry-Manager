@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 
-from frames.manager import Manager
+from tabs.manager import Manager
 
 root = Tk()
 
@@ -11,13 +11,13 @@ class App:
         root.title('EVE Industry Manager')
 
         # Set the window dimensions and center it
-        width, height = 550, 550
+        width, height = 600, 600
         x = (root.winfo_screenwidth() - width) // 2
         y = (root.winfo_screenheight() - height) // 2
         root.geometry("{}x{}+{}+{}".format(width, height, x, y))
         # root.resizable(0, 0)
 
-        # * mainframe
+        # * Mainframe
         mainframe = ttk.Frame(root)
         mainframe.grid(column=0, row=0)
         root.columnconfigure(0, weight=1)

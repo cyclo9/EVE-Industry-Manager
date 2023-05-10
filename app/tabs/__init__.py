@@ -2,11 +2,13 @@ from tkinter import *
 from tkinter import ttk
 import re
 import json
+import os
 
 from widgets import CustomText, ScrollableFrame
 
 class Manager(ttk.Frame):
     def __init__(self, parent, *args, **kwargs):
+        '''The Manager tab which is in charge taking inventory, saving recipes, and calculating materials required and missing.'''
         super().__init__(parent, *args, **kwargs)
 
         # * Mainframe
@@ -58,26 +60,29 @@ class Manager(ttk.Frame):
         # Save Button
         save_recipe = ttk.Button(input_frm, text='Save', command=self.save_recipe)
         save_recipe.grid(column=2, row=0)
+        item_entry.bind('<Return>', lambda e: save_recipe.invoke())
 
-        # * Job
+        # * Selecting the Item
         # Label
-        job_label = ttk.Label(input_frm, text='Start Job:')
-        job_label.grid(column=0, row=2)
+        select_item_label = ttk.Label(input_frm, text='Select Item:')
+        select_item_label.grid(column=0, row=2)
         # Entry
-        job = StringVar()
-        job_entry = ttk.Entry(input_frm, textvariable=job, width=15)
-        job_entry.grid(column=1, row=2)
-        # Start Button
-        start_job = ttk.Button(input_frm, text='Start')
-        start_job.grid(column=2, row=2)
+        self.selected_item = StringVar()
+        select_item_entry = ttk.Entry(input_frm, textvariable=self.selected_item, width=15)
+        select_item_entry.grid(column=1, row=2)
+        # Calculate Button
+        calculate = ttk.Button(input_frm, text='Calculate', command=self.calculate_mats)
+        calculate.grid(column=2, row=2)
+        select_item_entry.bind('<Return>', lambda e: calculate.invoke())
 
         # * Materials Required
         # Label
         mats_req_label = ttk.Label(mats_req_frm, text='Materials Required')
         mats_req_label.grid(column=0, row=0)
         # Textbox
-        mats_req = CustomText(mats_req_frm, width=70, height=10)
-        mats_req.grid(column=0, row=1, columnspan=70, rowspan=70)
+        self.masterlist = {}
+        self.mats_req = CustomText(mats_req_frm, width=70, height=10)
+        self.mats_req.grid(column=0, row=1, columnspan=70, rowspan=70)
 
     def parse_inventory(self, *args):
         content = self.inventory.get('1.0', 'end').splitlines()
@@ -119,3 +124,32 @@ class Manager(ttk.Frame):
 
         self.item.set('')
         self.recipe.delete('1.0', 'end')
+
+    def find_ingredients(self, item):
+        dir = os.listdir('data/recipes')
+        target_file = '{}.json'.format(item.lower())
+        for i, file in enumerate(dir): # go through the directory
+            if file == target_file: # find the file that matches with one looking for
+                current_ingredient = target_file.split('.json')[0].title()
+                try:
+                    del self.masterlist[current_ingredient]
+                except:
+                    pass
+                selected_file = open('data/recipes/{}'.format(dir[i]), 'r') # open taht file up
+                recipe = json.loads(''.join(selected_file.readlines())) # load it into json
+                selected_file.close()
+                for ingredient in recipe:
+                    self.masterlist[ingredient] = recipe[ingredient] # for each ingredient in the recipe, add it to the masterlist
+                    self.find_ingredients(ingredient) # find the ingredients of each ingredient
+
+        # for ingredient in self.masterlist:
+        #     if target_file.split('.json')[0] == ingredient.lower():
+        #         del self.masterlist[ingredient]
+
+    def calculate_mats(self, *args):
+        self.find_ingredients(self.selected_item.get())
+        mats_req = []
+        for ingredient in self.masterlist:
+            mats_req.append('{} {}'.format(self.masterlist[ingredient], ingredient))
+        self.mats_req.insert('1.0', '\n'.join(mats_req))
+        print(json.dumps(self.masterlist, indent=4))

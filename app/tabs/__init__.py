@@ -3,8 +3,7 @@ from tkinter import ttk
 import re
 import json
 
-from widgets.CustomText import CustomText
-from widgets.ScrollableFrame import ScrollableFrame
+from widgets import CustomText, ScrollableFrame
 
 class Manager(ttk.Frame):
     def __init__(self, parent, *args, **kwargs):
@@ -114,7 +113,7 @@ class Manager(ttk.Frame):
                 pass
         
         if self.item.get() != '': # this prevents saving an empty file
-            file = open('data/recipes/{}.json'.format(self.item.get()), 'w+')
+            file = open('data/recipes/{}.json'.format(self.item.get().lower()), 'w+')
             file.write(json.dumps(recipe, indent=4))
             file.close
 

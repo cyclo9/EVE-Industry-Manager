@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 
-from tabs.manager import Manager
+from tabs import Manager
 
 root = Tk()
 

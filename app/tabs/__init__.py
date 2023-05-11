@@ -4,7 +4,7 @@ import re
 import json
 import os
 
-from widgets import CustomText, ScrollableFrame
+from widgets import CustomText, V_ScrollableFrame
 
 class Manager(ttk.Frame):
     def __init__(self, parent, *args, **kwargs):
@@ -12,7 +12,7 @@ class Manager(ttk.Frame):
         super().__init__(parent, *args, **kwargs)
 
         # * Mainframe
-        mainframe = ScrollableFrame(self, width=500, height=500)
+        mainframe = V_ScrollableFrame(self, width=500, height=500)
         mainframe.grid(column=0, row=0, sticky='nwes')
         mainframe.columnconfigure(0, weight=1)
         mainframe.rowconfigure(0, weight=1)
@@ -140,7 +140,7 @@ class Manager(ttk.Frame):
         self.item.set('')
         self.recipe.delete('1.0', 'end')
 
-    def calc_mats_req(self, item):
+    def calc_mats_req(self, item: str):
         dir = os.listdir('data/recipes')
         target_file = '{}.json'.format(item.lower())
         for i, file in enumerate(dir): # go through the directory
@@ -184,3 +184,23 @@ class Manager(ttk.Frame):
         self.mats_missing_textbox['state'] = NORMAL
         self.mats_missing_textbox.insert('1.0', '\n'.join(mats_missing))
         self.mats_missing_textbox['state'] = DISABLED
+
+class Job(ttk.Frame):
+    def __init__(self, parent, delete_tab, name, *args, **kwargs):
+        '''A template for creating Job tabs'''
+        super().__init__(parent, *args, **kwargs)
+
+        # * Mainframe
+        mainframe = V_ScrollableFrame(self, width=500, height=500)
+        mainframe.grid(column=0, row=0, sticky='nwes')
+        mainframe.columnconfigure(0, weight=1)
+        mainframe.rowconfigure(0, weight=1)
+        mainframe.scrollable_frame.columnconfigure(0, weight=1)
+        mainframe.scrollable_frame.rowconfigure(0, weight=1)
+
+        # * Button
+        delete = ttk.Button(mainframe, text='Delete', command=lambda: delete_tab(name))
+        delete.grid(column=0, row=0)
+
+    def delete(self, *args):
+        return

@@ -6,9 +6,9 @@ import os
 from modules import File, Crypto
 from widgets import CustomText, V_ScrollableFrame
 
-class Manager(ttk.Frame):
+class Dashboard(ttk.Frame):
     def __init__(self, parent, add_job, *args, **kwargs):
-        '''The Manager tab is in charge taking inventory, saving recipes, calculating materials required and missing, and starting jobs.'''
+        '''The Dashboard tab is in charge taking inventory, saving recipes, calculating materials required and missing, and starting jobs.'''
         super().__init__(parent, *args, **kwargs)
         self.add_job = add_job
 

@@ -4,7 +4,7 @@ import os
 
 from modules import File, Crypto
 from widgets import H_ScrollableFrame
-from tabs import Manager, Jobs
+from tabs import Dashboard, Jobs
 
 root = Tk()
 
@@ -32,40 +32,12 @@ class App:
         self.n.columnconfigure(0, weight=0)
         self.n.rowconfigure(0, weight=0)
 
-        # * Manager
+        # * Dashboard
         jobs_tab = Jobs(self.n)
-        self.n.add(Manager(self.n, jobs_tab.add_job), text='Manager')
+        self.n.add(Dashboard(self.n, jobs_tab.add_job), text='Dashboard')
 
         # * Jobs Page
         self.n.add(jobs_tab, text='Jobs')
-
-        # for job_file in os.listdir('data/jobs'):
-        #     name = job_file.split('.json')[0]
-        #     job_info = File().json_to_dict('data/jobs/{}'.format(job_file))
-        #     new_job = Job(self.n, self.delete_job, name, job_info)
-        #     self.n.add(new_job, text=name)
-
-    # def add_job(self, quantity, item, job_info):
-    #     '''Creates a new Job tab.'''
-    #     job_id = Crypto().generate_id()
-    #     name = '{} (x{}) {}'.format(item.title(), quantity, job_id)
-
-    #     # Saves the job_info into a file
-    #     file = open('data/jobs/{}.json'.format(name), 'w+')
-    #     file.write(File().dict_to_json(job_info))
-    #     file.close()
-
-    #     # Adds a new Job tab
-    #     new_job = Job(self.n, self.delete_job, name, job_info)
-    #     self.n.add(new_job, text=name)
-
-    # def delete_job(self, tab_name):
-    #     '''Deletes the current Job tab'''
-    #     for tab in self.n.tabs():
-    #         if self.n.tab(tab, "text") == tab_name:
-    #             self.n.forget(tab)
-    #             os.remove('data/jobs/{}.json'.format(tab_name))
-    #             break
 
 if __name__ == '__main__':
     App(root)

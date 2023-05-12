@@ -23,4 +23,4 @@ class File:
 class Crypto():
     def generate_id(self):
         '''Generate a unique ID using the uuid module.'''
-        return str(uuid.uuid4().hex)[:4]
+        return str(uuid.uuid4().hex)[:6]

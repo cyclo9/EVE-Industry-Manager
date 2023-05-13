@@ -3,7 +3,7 @@ from tkinter import ttk
 import re
 import os
 
-from modules import File, Crypto
+from modules import convert, crypto
 from widgets import CustomText, V_ScrollableFrame
 
 class Dashboard(ttk.Frame):
@@ -144,7 +144,7 @@ class Dashboard(ttk.Frame):
                 pass
 
         with open('data/inventory.json', 'w+') as file:
-            file.write(File().dict_to_json(inventory))
+            file.write(convert.dict_to_json(inventory))
 
     def save_recipe(self):
         '''Saves the blueprint recipe for an item.'''
@@ -163,7 +163,7 @@ class Dashboard(ttk.Frame):
         
         if self.item.get() != '': # this prevents saving an empty file
             with open('data/recipes/{}.json'.format(self.item.get().lower()), 'w+') as file:
-                file.write(File().dict_to_json(recipe))
+                file.write(convert.dict_to_json(recipe))
 
         self.item.set('')
         self.recipe.delete('1.0', 'end')
@@ -176,7 +176,7 @@ class Dashboard(ttk.Frame):
         if target_file in folder:
             stack.append(target_file)
             # adds all the ingredient's files of the select item to the stack
-            recipe = File().json_to_dict('data/recipes/{}'.format(target_file))
+            recipe = convert.json_to_dict('data/recipes/{}'.format(target_file))
             for ingredient in recipe:
                 stack.append('{}.json'.format(ingredient.lower()))
         else:
@@ -193,14 +193,14 @@ class Dashboard(ttk.Frame):
                 except Exception as e:
                     if type(e) != KeyError:
                         print(e)
-                recipe = File().json_to_dict('data/recipes/{}'.format(current_file))
+                recipe = convert.json_to_dict('data/recipes/{}'.format(current_file))
                 for ingredient in recipe:
                     stack.append('{}.json'.format(ingredient.lower()))
                     self.mats_req[ingredient] = recipe[ingredient] * multiplier
     
     def calc_mats_missing(self):
         '''Calculates materials missing based on what's already in the inventory.'''
-        inventory = File().json_to_dict('data/inventory.json')
+        inventory = convert.json_to_dict('data/inventory.json')
         self.mats_missing = {}
         for ingredient in self.mats_req:
             if ingredient in inventory:
@@ -220,10 +220,10 @@ class Dashboard(ttk.Frame):
         self.mats_missing_textbox.delete('1.0', 'end')
 
         self.calc_mats_req(self.selected_item.get(), self.multiplier.get())
-        self.mats_req_textbox.insert('1.0', File().dict_to_text(self.mats_req))
+        self.mats_req_textbox.insert('1.0', convert.dict_to_text(self.mats_req))
 
         self.calc_mats_missing()
-        self.mats_missing_textbox.insert('1.0', File().dict_to_text(self.mats_missing))
+        self.mats_missing_textbox.insert('1.0', convert.dict_to_text(self.mats_missing))
 
         self.mats_req_textbox['state'] = DISABLED
         self.mats_missing_textbox['state'] = DISABLED
@@ -273,8 +273,8 @@ class Jobs(ttk.Frame):
             Job(self.mainframe.scrollable_frame, file, i, self.delete_job).grid(column=0, row=i)
 
     def add_job(self, info):
-        with open('data/jobs/{}.json'.format(Crypto().generate_id()), 'w+') as file:
-            file.write(File().dict_to_json(info))
+        with open('data/jobs/{}.json'.format(crypto.generate_id()), 'w+') as file:
+            file.write(convert.dict_to_json(info))
         self.load_jobs()
     
     def delete_job(self, file):
@@ -286,7 +286,7 @@ class Job(ttk.Frame):
         '''A template frame for displaying information on a specific job'''
         super().__init__(parent, *args, **kwargs)
 
-        job_file = File().json_to_dict('data/jobs/{}'.format(file))
+        job_file = convert.json_to_dict('data/jobs/{}'.format(file))
         self.item = job_file['Name']
         self.quantity = job_file['Quantity']
 
@@ -306,7 +306,7 @@ class Job(ttk.Frame):
         # * Textbox
         textbox = CustomText(mainframe, width=70, height=10)
         textbox.grid(column=0, row=2, columnspan=70, rowspan=10)
-        textbox.insert('1.0', File().dict_to_text(job_file['Materials Used']))
+        textbox.insert('1.0', convert.dict_to_text(job_file['Materials Used']))
         textbox['state'] = DISABLED
 
         # * Button

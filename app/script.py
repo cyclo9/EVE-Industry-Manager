@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter import ttk
 import os
 
-from modules import File, Crypto
 from widgets import H_ScrollableFrame
 from tabs import Dashboard, Jobs
 
@@ -34,9 +33,9 @@ class App:
 
         # * Dashboard
         jobs_tab = Jobs(self.n)
-        self.n.add(Dashboard(self.n, jobs_tab.add_job), text='Dashboard')
+        dashboard = Dashboard(self.n, jobs_tab.add_job)
 
-        # * Jobs Page
+        self.n.add(dashboard, text='Dashboard')
         self.n.add(jobs_tab, text='Jobs')
 
 if __name__ == '__main__':

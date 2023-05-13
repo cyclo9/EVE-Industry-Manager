@@ -172,19 +172,33 @@ class Dashboard(ttk.Frame):
 
     def calc_mats_req(self, item: str, multiplier):
         '''Calculates the materials required to manufacture the selected item.'''
-        dir = os.listdir('data/recipes')
+        folder = os.listdir('data/recipes')
         target_file = '{}.json'.format(item.lower())
-        for i, file in enumerate(dir):
-            if file == target_file:
-                current_ingredient = target_file.split('.json')[0].title()
+        stack = []
+        if target_file in folder:
+            stack.append(target_file)
+            # adds all the ingredient's files of the select item to the stack
+            recipe = File().json_to_dict('data/recipes/{}'.format(target_file))
+            for ingredient in recipe:
+                stack.append('{}.json'.format(ingredient.lower()))
+        else:
+            return
+
+        while stack:
+            current_file = stack.pop()
+            if current_file in folder:
+                current_ingredient = current_file.split('.json')[0].title()
                 try:
                     del self.mats_req[current_ingredient]
-                except:
+                except KeyError:
                     pass
-                recipe = File().json_to_dict('data/recipes/{}'.format(dir[i]))
+                except Exception as e:
+                    if type(e) != KeyError:
+                        print(e)
+                recipe = File().json_to_dict('data/recipes/{}'.format(current_file))
                 for ingredient in recipe:
+                    stack.append('{}.json'.format(ingredient.lower()))
                     self.mats_req[ingredient] = recipe[ingredient] * multiplier
-                    self.calc_mats_req(ingredient, multiplier)
     
     def calc_mats_missing(self):
         '''Calculates materials missing based on what's already in the inventory.'''
@@ -218,7 +232,7 @@ class Dashboard(ttk.Frame):
 
     def start_job(self):
         item = self.job.get().lower()
-        item_file = '{}.json'.format(item)
+        item_file = '{}.json'.format(item.lower())
         dir = os.listdir('data/recipes')
         if item_file in dir: # checks if the item is a valid item
             self.calc_mats_req(item, self.quantity.get())

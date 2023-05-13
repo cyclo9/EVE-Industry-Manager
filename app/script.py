@@ -1,7 +1,9 @@
 from tkinter import *
 from tkinter import ttk
+import os
 
-from frames.manager import Manager
+from widgets import H_ScrollableFrame
+from tabs import Dashboard, Jobs
 
 root = Tk()
 
@@ -9,27 +11,32 @@ class App:
     def __init__(self, root):
         # * root
         root.title('EVE Industry Manager')
-        # centers window
-        w = 550; h = 900
-        ws = root.winfo_screenwidth()
-        hs = root.winfo_screenheight()
-        x = (ws/2) - (w/2)
-        y = (hs/2) - (h/2)
-        root.geometry('%dx%d+%d+%d' % (w, h, x, y))
-        root.resizable(0, 0)
 
-        # * mainframe
-        mainframe = ttk.Frame(root)
+        # Set the window dimensions and center it
+        width, height = 569, 600
+        x = (root.winfo_screenwidth() - width) // 2
+        y = (root.winfo_screenheight() - height) // 2
+        root.geometry("{}x{}+{}+{}".format(width, height, x, y))
+        # root.resizable(0, 0)
+
+        # * Mainframe
+        mainframe = H_ScrollableFrame(root)
         mainframe.grid(column=0, row=0)
         root.columnconfigure(0, weight=1)
         root.rowconfigure(0, weight=1)
 
         # * Notebook
-        n = ttk.Notebook(mainframe)
-        n.grid(column=0, row=0)
+        self.n = ttk.Notebook(mainframe, width=515)
+        self.n.grid(column=0, row=0)
+        self.n.columnconfigure(0, weight=0)
+        self.n.rowconfigure(0, weight=0)
 
-        # Manager
-        n.add(Manager(n), text='Manager')
+        # * Dashboard
+        jobs_tab = Jobs(self.n)
+        dashboard = Dashboard(self.n, jobs_tab.add_job)
+
+        self.n.add(dashboard, text='Dashboard')
+        self.n.add(jobs_tab, text='Jobs')
 
 if __name__ == '__main__':
     App(root)

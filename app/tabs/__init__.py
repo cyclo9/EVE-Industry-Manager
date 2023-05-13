@@ -51,7 +51,7 @@ class Dashboard(ttk.Frame):
         inv_label.grid(column=0, row=0)
         # Entrybox
         self.inventory = CustomText(inv_frm, width=70, height=10)
-        self.inventory.bind('<<TextInsert>>', self.save_inventory)
+        self.inventory.bind('<<TextInsert>>', lambda e: self.save_inventory())
         self.inventory.grid(column=0, row=1, columnspan=70, rowspan=10)
 
         # * Recipe
@@ -143,9 +143,8 @@ class Dashboard(ttk.Frame):
             except:
                 pass
 
-        file = open('data/inventory.json', 'w+')
-        file.write(File().dict_to_json(inventory))
-        file.close
+        with open('data/inventory.json', 'w+') as file:
+            file.write(File().dict_to_json(inventory))
 
     def save_recipe(self):
         '''Saves the blueprint recipe for an item.'''
@@ -163,9 +162,8 @@ class Dashboard(ttk.Frame):
                 pass
         
         if self.item.get() != '': # this prevents saving an empty file
-            file = open('data/recipes/{}.json'.format(self.item.get().lower()), 'w+')
-            file.write(File().dict_to_json(recipe))
-            file.close
+            with open('data/recipes/{}.json'.format(self.item.get().lower()), 'w+') as file:
+                file.write(File().dict_to_json(recipe))
 
         self.item.set('')
         self.recipe.delete('1.0', 'end')
@@ -274,11 +272,9 @@ class Jobs(ttk.Frame):
         for i, file in enumerate(dir):
             Job(self.mainframe.scrollable_frame, file, i, self.delete_job).grid(column=0, row=i)
 
-
     def add_job(self, info):
-        file = open('data/jobs/{}.json'.format(Crypto().generate_id()), 'w+')
-        file.write(File().dict_to_json(info))
-        file.close()
+        with open('data/jobs/{}.json'.format(Crypto().generate_id()), 'w+') as file:
+            file.write(File().dict_to_json(info))
         self.load_jobs()
     
     def delete_job(self, file):

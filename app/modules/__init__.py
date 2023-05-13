@@ -4,10 +4,10 @@ import uuid
 class File:
     def json_to_dict(self, path: str) -> any:
         '''Returns a JSON file as a dictionary'''
-        file = open(path, 'r')
-        content = file.readlines()
-        dict = json.loads(''.join(content))
-        return dict
+        with open(path, 'r') as file:
+            content = file.readlines()
+            dict = json.loads(''.join(content))
+            return dict
 
     def dict_to_json(self, dict) -> str:
         '''Returns a dictionary in JSON format'''

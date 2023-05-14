@@ -1,5 +1,0 @@
-from widgets.CustomText.CustomText import CustomText
-from widgets.H_ScrollableFrame.H_ScrollableFrame import H_ScrollableFrame
-from widgets.ScrollableFrame.ScrollableFrame import ScrollableFrame
-from widgets.V_ScrollableFrame.V_ScrollableFrame import V_ScrollableFrame
-from widgets.Job.Job import Job

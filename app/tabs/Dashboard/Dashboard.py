@@ -73,6 +73,9 @@ class Dashboard(ttk.Frame):
         save_recipe = ttk.Button(input_frm, text='Save', command=self.save_recipe)
         save_recipe.grid(column=3, row=0)
         item_entry.bind('<Return>', lambda e: save_recipe.invoke())
+        # Delete Button
+        delete_recipe = ttk.Button(input_frm, text='X', command=self.delete_recipe, width=1)
+        delete_recipe.grid(column=4, row=0)
 
         # * Selecting the Item
         # Label
@@ -167,6 +170,10 @@ class Dashboard(ttk.Frame):
 
         self.item.set('')
         self.recipe.delete('1.0', 'end')
+
+    def delete_recipe(self):
+        '''Deletes the file of the recipe selected'''
+        os.remove('data/recipes/{}.json'.format(self.item.get()))
 
     def calc_mats_req(self, item: str, multiplier):
         '''Calculates the materials required to manufacture the selected item.'''

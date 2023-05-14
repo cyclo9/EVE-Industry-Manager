@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter import ttk
-import os
 
 from widgets import H_ScrollableFrame
 from tabs import Dashboard, Jobs

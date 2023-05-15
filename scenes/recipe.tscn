@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbvj0centdtaa"]
+
+[ext_resource type="Script" path="res://scripts/Recipe/RecipeLabel.gd" id="1_khbqr"]
+[ext_resource type="Texture2D" uid="uid://cit2fdwo3qrcy" path="res://assets/images/delete.png" id="1_ybe0h"]
+
+[node name="ReferenceRect" type="ReferenceRect"]
+offset_left = 14.0
+offset_top = 22.0
+offset_right = 264.0
+offset_bottom = 53.0
+border_color = Color(1, 1, 1, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 214.0
+offset_bottom = 30.0
+text = "Label"
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+script = ExtResource("1_khbqr")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 1.0
+offset_right = 249.0
+offset_bottom = 30.0
+icon = ExtResource("1_ybe0h")
+icon_alignment = 1
+expand_icon = true

@@ -1,0 +1,138 @@
+[gd_scene load_steps=7 format=3 uid="uid://ba6oantobuahb"]
+
+[ext_resource type="FontFile" uid="uid://deo1pnjujhkiy" path="res://assets/fonts/Fira Mono/FiraMono-Medium.ttf" id="1_00p4f"]
+[ext_resource type="Script" path="res://scripts/EVE Industry Manager/eve_industry_manager.gd" id="1_dyk41"]
+[ext_resource type="Script" path="res://scripts/Inventory/inventory.gd" id="3_pkt6b"]
+[ext_resource type="Script" path="res://scripts/Recipe/RecipeText.gd" id="4_ts53q"]
+[ext_resource type="Script" path="res://scripts/Recipe/ItemNameText.gd" id="5_4ade1"]
+[ext_resource type="Script" path="res://scripts/Recipe/SaveRecipe.gd" id="6_eoqdc"]
+
+[node name="TabContainer" type="TabContainer"]
+custom_minimum_size = Vector2(600, 800)
+offset_right = 600.0
+offset_bottom = 931.0
+tab_alignment = 1
+script = ExtResource("1_dyk41")
+
+[node name="Dashboard" type="ScrollContainer" parent="."]
+clip_contents = false
+custom_minimum_size = Vector2(600, 900)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Dashboard"]
+custom_minimum_size = Vector2(600, 800)
+layout_mode = 2
+
+[node name="Inventory" type="Control" parent="Dashboard/Control"]
+anchors_preset = 0
+offset_left = 25.0
+offset_top = 33.0
+offset_right = 578.0
+offset_bottom = 289.0
+
+[node name="Label" type="Label" parent="Dashboard/Control/Inventory"]
+layout_mode = 0
+offset_left = -1.0
+offset_right = 551.0
+offset_bottom = 32.0
+text = "Inventory
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="Dashboard/Control/Inventory"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 551.0
+offset_bottom = 227.0
+theme_override_fonts/font = ExtResource("1_00p4f")
+theme_override_font_sizes/font_size = 14
+placeholder_text = "Copy and paste your inventory here"
+scroll_smooth = true
+script = ExtResource("3_pkt6b")
+
+[node name="Recipe" type="Control" parent="Dashboard/Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 289.0
+offset_right = 576.0
+offset_bottom = 577.0
+
+[node name="RecipeLabel" type="Label" parent="Dashboard/Control/Recipe"]
+layout_mode = 0
+offset_right = 552.0
+offset_bottom = 32.0
+text = "Recipe
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemNameLabel" type="Label" parent="Dashboard/Control/Recipe"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 240.0
+offset_right = 200.0
+offset_bottom = 280.0
+text = "Item Name:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemNameText" type="LineEdit" parent="Dashboard/Control/Recipe"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 240.0
+offset_right = 368.0
+offset_bottom = 280.0
+theme_override_fonts/font = ExtResource("1_00p4f")
+placeholder_text = "Enter item name"
+script = ExtResource("5_4ade1")
+
+[node name="RecipeText" type="TextEdit" parent="Dashboard/Control/Recipe"]
+light_mask = 3
+layout_mode = 0
+offset_top = 32.0
+offset_right = 551.0
+offset_bottom = 223.0
+theme_override_fonts/font = ExtResource("1_00p4f")
+theme_override_font_sizes/font_size = 14
+placeholder_text = "Copy and paste the recipe of an item's blueprint"
+scroll_smooth = true
+script = ExtResource("4_ts53q")
+
+[node name="SaveRecipe" type="Button" parent="Dashboard/Control/Recipe"]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 240.0
+offset_right = 432.0
+offset_bottom = 280.0
+theme_override_fonts/font = ExtResource("1_00p4f")
+text = "Save"
+script = ExtResource("6_eoqdc")
+
+[node name="Jobs" type="ScrollContainer" parent="."]
+visible = false
+clip_contents = false
+custom_minimum_size = Vector2(600, 900)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Jobs"]
+layout_mode = 2
+
+[node name="Recipes" type="ScrollContainer" parent="."]
+visible = false
+clip_contents = false
+custom_minimum_size = Vector2(600, 900)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Recipes"]
+visible = false
+custom_minimum_size = Vector2(600, 900)
+layout_mode = 2
+
+[connection signal="text_changed" from="Dashboard/Control/Inventory/TextEdit" to="Dashboard/Control/Inventory/TextEdit" method="_on_text_changed"]
+[connection signal="send_item_name" from="Dashboard/Control/Recipe/ItemNameText" to="Dashboard/Control/Recipe/SaveRecipe" method="_on_item_name_text_send_item_name"]
+[connection signal="send_recipe" from="Dashboard/Control/Recipe/RecipeText" to="Dashboard/Control/Recipe/SaveRecipe" method="_on_recipe_text_send_recipe"]
+[connection signal="pressed" from="Dashboard/Control/Recipe/SaveRecipe" to="Dashboard/Control/Recipe/SaveRecipe" method="_on_pressed"]
+[connection signal="pressed" from="Dashboard/Control/Recipe/SaveRecipe" to="Dashboard/Control/Recipe/ItemNameText" method="_on_save_recipe_pressed"]
+[connection signal="pressed" from="Dashboard/Control/Recipe/SaveRecipe" to="Dashboard/Control/Recipe/RecipeText" method="_on_save_recipe_pressed"]

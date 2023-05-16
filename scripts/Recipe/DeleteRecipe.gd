@@ -13,9 +13,10 @@ func _on_pressed():
 	
 	var dir = DirAccess.open('user://data/recipes')
 	var error = dir.remove('user://data/recipes/{}'.format({'': recipe_file}))
-	if error != OK:
-		print('Recipe failed to delete')
-	else:
+	if error == OK:
 		print('Recipe delete successful')
+	else:
+		print('Recipe failed to delete')
+		print(recipe_file)
 	dir.remove(recipe_file)
 	delete_recipe.emit()

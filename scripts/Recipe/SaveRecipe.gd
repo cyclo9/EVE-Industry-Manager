@@ -27,7 +27,7 @@ func parse_recipe(recipe_text):
 func _on_pressed():
 	var item_name = ItemNameText.text
 	var recipe = parse_recipe(RecipeText.text)
-	
+
 	if FileAccess.file_exists('user://data/recipes/{item_name}.json'.format({'item_name': item_name.to_lower()})):
 		var dir = DirAccess.open('user://data/recipes')
 		dir.remove('{item_name}'.format({'item_name': item_name.to_lower()}))

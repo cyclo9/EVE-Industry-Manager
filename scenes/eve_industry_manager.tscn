@@ -9,7 +9,6 @@
 [node name="TabContainer" type="TabContainer"]
 offset_right = 600.0
 offset_bottom = 931.0
-scale = Vector2(1.5, 1.5)
 script = ExtResource("1_dyk41")
 
 [node name="Dashboard" type="ScrollContainer" parent="."]
@@ -115,18 +114,22 @@ layout_mode = 2
 [node name="Control" type="Control" parent="Jobs"]
 layout_mode = 2
 
-[node name="Recipes" type="ScrollContainer" parent="."]
+[node name="Recipes" type="Control" parent="."]
 visible = false
-clip_contents = false
-custom_minimum_size = Vector2(600, 900)
+custom_minimum_size = Vector2(600, 931)
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Recipes"]
-custom_minimum_size = Vector2(600, 900)
+[node name="ScrollContainer" type="ScrollContainer" parent="Recipes"]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 600.0
+offset_bottom = 931.0
+
+[node name="Control" type="Control" parent="Recipes/ScrollContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("5_v3fgq")
 
 [connection signal="text_changed" from="Dashboard/Control/Inventory/TextEdit" to="Dashboard/Control/Inventory/TextEdit" method="_on_text_changed"]
-[connection signal="add_recipe" from="Dashboard/Control/Recipe/SaveRecipe" to="Recipes/Control" method="_on_save_recipe_add_recipe"]
+[connection signal="add_recipe" from="Dashboard/Control/Recipe/SaveRecipe" to="Recipes/ScrollContainer/Control" method="_on_add_recipe"]
 [connection signal="pressed" from="Dashboard/Control/Recipe/SaveRecipe" to="Dashboard/Control/Recipe/SaveRecipe" method="_on_pressed"]

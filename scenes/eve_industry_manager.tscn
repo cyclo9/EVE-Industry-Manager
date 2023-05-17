@@ -1,52 +1,84 @@
-[gd_scene load_steps=6 format=3 uid="uid://bp0nea5hpdntd"]
+[gd_scene load_steps=12 format=3 uid="uid://bf24ip0jflyo4"]
 
 [ext_resource type="FontFile" uid="uid://deo1pnjujhkiy" path="res://assets/fonts/Fira Mono/FiraMono-Medium.ttf" id="1_00p4f"]
-[ext_resource type="Script" path="res://scripts/EVE Industry Manager/eve_industry_manager.gd" id="1_dyk41"]
-[ext_resource type="Script" path="res://scripts/Inventory/inventory.gd" id="3_pkt6b"]
+[ext_resource type="Theme" uid="uid://clxof0dpu30ve" path="res://assets/themes/text.tres" id="2_pjyqq"]
+[ext_resource type="Script" path="res://scripts/Inventory/SaveInventory.gd" id="2_t56c6"]
+[ext_resource type="Script" path="res://scripts/Recipe/RecipeText.gd" id="4_okv1a"]
 [ext_resource type="Script" path="res://scripts/Recipe/LoadRecipes.gd" id="5_v3fgq"]
+[ext_resource type="Script" path="res://scripts/Materials Required/Calculate.gd" id="6_8ls4w"]
 [ext_resource type="Script" path="res://scripts/Recipe/SaveRecipe.gd" id="6_eoqdc"]
+[ext_resource type="Script" path="res://scripts/Materials Required/MaterialsReqText.gd" id="6_pi414"]
+[ext_resource type="Script" path="res://scripts/Materials Required/MultiplierText.gd" id="7_fmt7d"]
+
+[sub_resource type="GDScript" id="GDScript_evw1v"]
+script/source = "extends TabContainer
+
+var dir = DirAccess.open('user://')
+
+func _ready():
+	if dir.dir_exists('user://data'):
+		print('\\'data\\' folder found.')
+	else:
+		print('\\'data\\' not found. Creating...')
+		dir.make_dir('user://data')
+
+	if dir.dir_exists('user://data/recipes'):
+		print('\\'recipes\\' folder found.')
+	else:
+		print('\\'recipes\\' not found. Creating...')
+		dir.make_dir('user://data/recipes')
+		
+	if dir.dir_exists('user://data/jobs'):
+		print('\\'jobs\\' folder found.')
+	else:
+		print('\\'jobs\\' not found. Creating...')
+		dir.make_dir('user://data/jobs')
+	print()
+"
+
+[sub_resource type="Theme" id="Theme_1avar"]
 
 [node name="TabContainer" type="TabContainer"]
-offset_right = 600.0
+offset_right = 608.0
 offset_bottom = 931.0
-script = ExtResource("1_dyk41")
+script = SubResource("GDScript_evw1v")
 
 [node name="Dashboard" type="ScrollContainer" parent="."]
-clip_contents = false
 custom_minimum_size = Vector2(600, 900)
 layout_mode = 2
 
 [node name="Control" type="Control" parent="Dashboard"]
-custom_minimum_size = Vector2(600, 800)
+custom_minimum_size = Vector2(600, 1000)
 layout_mode = 2
+theme = ExtResource("2_pjyqq")
 
 [node name="Inventory" type="Control" parent="Dashboard/Control"]
 anchors_preset = 0
-offset_left = 25.0
+offset_left = 24.0
 offset_top = 33.0
-offset_right = 578.0
-offset_bottom = 289.0
+offset_right = 576.0
+offset_bottom = 257.0
 
 [node name="Label" type="Label" parent="Dashboard/Control/Inventory"]
 layout_mode = 0
 offset_left = -1.0
 offset_right = 551.0
 offset_bottom = 32.0
+theme = ExtResource("2_pjyqq")
 text = "Inventory
 "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextEdit" type="TextEdit" parent="Dashboard/Control/Inventory"]
+[node name="InventoryText" type="TextEdit" parent="Dashboard/Control/Inventory"]
 layout_mode = 0
 offset_top = 32.0
 offset_right = 551.0
-offset_bottom = 227.0
-theme_override_fonts/font = ExtResource("1_00p4f")
-theme_override_font_sizes/font_size = 14
+offset_bottom = 224.0
+theme = ExtResource("2_pjyqq")
 placeholder_text = "Copy and paste your inventory here"
 scroll_smooth = true
-script = ExtResource("3_pkt6b")
+script = ExtResource("2_t56c6")
 
 [node name="Recipe" type="Control" parent="Dashboard/Control"]
 layout_mode = 3
@@ -60,6 +92,7 @@ offset_bottom = 577.0
 layout_mode = 0
 offset_right = 552.0
 offset_bottom = 32.0
+theme = ExtResource("2_pjyqq")
 text = "Recipe
 "
 horizontal_alignment = 1
@@ -71,6 +104,7 @@ offset_left = 104.0
 offset_top = 240.0
 offset_right = 200.0
 offset_bottom = 280.0
+theme = ExtResource("2_pjyqq")
 text = "Item Name:"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -81,8 +115,9 @@ offset_left = 208.0
 offset_top = 240.0
 offset_right = 368.0
 offset_bottom = 280.0
-theme_override_fonts/font = ExtResource("1_00p4f")
+theme = ExtResource("2_pjyqq")
 placeholder_text = "Enter item name"
+script = ExtResource("6_eoqdc")
 
 [node name="RecipeText" type="TextEdit" parent="Dashboard/Control/Recipe"]
 light_mask = 3
@@ -90,20 +125,87 @@ layout_mode = 0
 offset_top = 32.0
 offset_right = 551.0
 offset_bottom = 223.0
-theme_override_fonts/font = ExtResource("1_00p4f")
-theme_override_font_sizes/font_size = 14
+theme = ExtResource("2_pjyqq")
 placeholder_text = "Copy and paste the recipe of an item's blueprint"
 scroll_smooth = true
+script = ExtResource("4_okv1a")
 
-[node name="SaveRecipe" type="Button" parent="Dashboard/Control/Recipe"]
+[node name="SaveButton" type="Button" parent="Dashboard/Control/Recipe"]
 layout_mode = 0
 offset_left = 376.0
 offset_top = 240.0
 offset_right = 432.0
 offset_bottom = 280.0
+theme = ExtResource("2_pjyqq")
 theme_override_fonts/font = ExtResource("1_00p4f")
 text = "Save"
-script = ExtResource("6_eoqdc")
+
+[node name="MaterialsReq" type="Control" parent="Dashboard/Control"]
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 609.0
+offset_right = 576.0
+offset_bottom = 897.0
+
+[node name="ItemLabel" type="Label" parent="Dashboard/Control/MaterialsReq"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 0.0726929
+offset_right = 128.0
+offset_bottom = 40.0727
+rotation = -0.00151455
+theme = ExtResource("2_pjyqq")
+text = "Item:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemText" type="LineEdit" parent="Dashboard/Control/MaterialsReq"]
+layout_mode = 0
+offset_left = 136.0
+offset_right = 288.0
+offset_bottom = 40.0
+theme = ExtResource("2_pjyqq")
+placeholder_text = "Enter item"
+script = ExtResource("6_8ls4w")
+
+[node name="MultiplierText" type="LineEdit" parent="Dashboard/Control/MaterialsReq"]
+layout_mode = 0
+offset_left = 296.0
+offset_right = 368.0
+offset_bottom = 40.0
+text = "1"
+select_all_on_focus = true
+script = ExtResource("7_fmt7d")
+
+[node name="CalculateButton" type="Button" parent="Dashboard/Control/MaterialsReq"]
+layout_mode = 0
+offset_left = 376.0
+offset_right = 456.0
+offset_bottom = 40.0
+theme = SubResource("Theme_1avar")
+text = "Calculate"
+
+[node name="MaterialsReqLabel" type="Label" parent="Dashboard/Control/MaterialsReq"]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 552.0
+offset_bottom = 96.0
+theme = ExtResource("2_pjyqq")
+text = "Materials Required"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MaterialsReqText" type="TextEdit" parent="Dashboard/Control/MaterialsReq"]
+light_mask = 3
+layout_mode = 0
+offset_top = 96.0
+offset_right = 552.0
+offset_bottom = 288.0
+theme = ExtResource("2_pjyqq")
+placeholder_text = "Here are the materials required to make the selected item"
+editable = false
+scroll_smooth = true
+script = ExtResource("6_pi414")
 
 [node name="Jobs" type="ScrollContainer" parent="."]
 visible = false
@@ -114,22 +216,24 @@ layout_mode = 2
 [node name="Control" type="Control" parent="Jobs"]
 layout_mode = 2
 
-[node name="Recipes" type="Control" parent="."]
+[node name="Recipes" type="ScrollContainer" parent="."]
 visible = false
-custom_minimum_size = Vector2(600, 931)
+custom_minimum_size = Vector2(600, 900)
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Recipes"]
-layout_mode = 1
-anchors_preset = -1
-offset_right = 600.0
-offset_bottom = 931.0
-
-[node name="Control" type="Control" parent="Recipes/ScrollContainer"]
+[node name="Control" type="Control" parent="Recipes"]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("5_v3fgq")
 
-[connection signal="text_changed" from="Dashboard/Control/Inventory/TextEdit" to="Dashboard/Control/Inventory/TextEdit" method="_on_text_changed"]
-[connection signal="add_recipe" from="Dashboard/Control/Recipe/SaveRecipe" to="Recipes/ScrollContainer/Control" method="_on_add_recipe"]
-[connection signal="pressed" from="Dashboard/Control/Recipe/SaveRecipe" to="Dashboard/Control/Recipe/SaveRecipe" method="_on_pressed"]
+[connection signal="mouse_entered" from="Dashboard/Control/Inventory/InventoryText" to="Dashboard/Control/Inventory/InventoryText" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Dashboard/Control/Inventory/InventoryText" to="Dashboard/Control/Inventory/InventoryText" method="_on_mouse_exited"]
+[connection signal="text_changed" from="Dashboard/Control/Inventory/InventoryText" to="Dashboard/Control/Inventory/InventoryText" method="_on_text_changed"]
+[connection signal="add_recipe" from="Dashboard/Control/Recipe/ItemNameText" to="Recipes/Control" method="_on_add_recipe"]
+[connection signal="mouse_entered" from="Dashboard/Control/Recipe/RecipeText" to="Dashboard/Control/Recipe/RecipeText" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Dashboard/Control/Recipe/RecipeText" to="Dashboard/Control/Recipe/RecipeText" method="_on_mouse_exited"]
+[connection signal="pressed" from="Dashboard/Control/Recipe/SaveButton" to="Dashboard/Control/Recipe/ItemNameText" method="_on_save_recipe_pressed"]
+[connection signal="calculate_cost" from="Dashboard/Control/MaterialsReq/MultiplierText" to="Dashboard/Control/MaterialsReq/ItemText" method="_on_multiplier_text_calculate_cost"]
+[connection signal="pressed" from="Dashboard/Control/MaterialsReq/CalculateButton" to="Dashboard/Control/MaterialsReq/ItemText" method="_on_calculate_button_pressed"]
+[connection signal="mouse_entered" from="Dashboard/Control/MaterialsReq/MaterialsReqText" to="Dashboard/Control/MaterialsReq/MaterialsReqText" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Dashboard/Control/MaterialsReq/MaterialsReqText" to="Dashboard/Control/MaterialsReq/MaterialsReqText" method="_on_mouse_exited"]

@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbvj0centdtaa"]
+[gd_scene load_steps=4 format=3 uid="uid://bbvj0centdtaa"]
 
+[ext_resource type="Theme" uid="uid://clxof0dpu30ve" path="res://assets/themes/text.tres" id="1_36tep"]
 [ext_resource type="Texture2D" uid="uid://cit2fdwo3qrcy" path="res://assets/images/delete.png" id="1_ybe0h"]
 [ext_resource type="Script" path="res://scripts/Recipe/DeleteRecipe.gd" id="2_jwxsk"]
 
@@ -14,8 +15,9 @@ size_flags_vertical = 3
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 214.0
+offset_right = 544.0
 offset_bottom = 30.0
+theme = ExtResource("1_36tep")
 text = "Label"
 vertical_alignment = 1
 clip_text = true
@@ -27,6 +29,7 @@ offset_left = 550.0
 offset_top = 1.0
 offset_right = 584.0
 offset_bottom = 30.0
+theme = ExtResource("1_36tep")
 icon = ExtResource("1_ybe0h")
 icon_alignment = 1
 expand_icon = true

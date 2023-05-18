@@ -41,9 +41,11 @@ func save_recipe():
 		if file:
 			file.store_string(JSON.stringify(recipe, '\t'))
 			add_recipe.emit()
-			print('Recipe save successful')
+			print('Recipe save successful.')
 		else:
 			print('Recipe failed to save.')
+	else:
+		print('Item Name/Recipe is/are empty.')
 			
 	ItemNameText.set_text('')
 	RecipeText.set_text('')

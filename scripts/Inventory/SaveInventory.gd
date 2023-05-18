@@ -20,9 +20,9 @@ func save_inventory():
 	var file = FileAccess.open('user://data/inventory.json', FileAccess.WRITE)
 	if file:
 		file.store_string(JSON.stringify(inventory, '\t'))
-		print('Inventory save successful')
+		print('Inventory save successful.')
 	else:
-		print('Inventory failed to save')
+		print('Inventory failed to save.')
 
 func _on_text_changed():
 	parse_inventory()

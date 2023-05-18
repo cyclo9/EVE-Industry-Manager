@@ -2,4 +2,4 @@
 .godot/
 .DS_Store
 *.exe
-*.pkg
+*.pck

@@ -1,7 +1,7 @@
 extends Node
 
 static func json_to_dict(file_name: String):
-	var file = FileAccess.open('user://data/recipes/{}'.format({'': file_name}), FileAccess.READ)
+	var file = FileAccess.open('user://data/recipes/{}'.format({'': file_name.to_lower()}), FileAccess.READ)
 	return JSON.parse_string(file.get_as_text())
 	
 static func dict_to_multiline_str(dict: Dictionary):

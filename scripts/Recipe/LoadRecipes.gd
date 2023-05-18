@@ -24,7 +24,7 @@ func load_recipes():
 			# get the recipe name
 			var recipe_name = recipes_list[i].split('.json')[0]
 			var recipe_instance = recipe_scene.instantiate()
-			recipe_instance.get_child(0).set_text(modules.title(recipe_name))
+			recipe_instance.get_child(0).set_text(recipe_name.to_upper())
 			recipe_instance.get_child(1).connect('delete_recipe', _on_delete_recipe)
 			recipe_instance.position = Vector2(10, (i * 48))
 			add_child(recipe_instance)

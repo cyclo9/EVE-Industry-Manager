@@ -29,7 +29,7 @@ func calc_mats_req():
 			stack.append('{}.json'.format({'': ingredient}))
 	else:
 		print('Item not found.')
-		
+
 	while stack:
 		var current_file = stack.pop_back()
 		if FileAccess.file_exists('user://data/recipes/{}'.format({'': current_file})):

@@ -1,0 +1,14 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://clxof0dpu30ve"]
+
+[ext_resource type="FontFile" uid="uid://deo1pnjujhkiy" path="res://assets/fonts/Fira Mono/FiraMono-Medium.ttf" id="1_toupg"]
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/fonts/font = ExtResource("1_toupg")
+Label/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/fonts/font = ExtResource("1_toupg")
+TextEdit/colors/font_color = Color(1, 1, 1, 1)
+TextEdit/colors/font_readonly_color = Color(1, 1, 1, 1)
+TextEdit/font_sizes/font_size = 14
+TextEdit/fonts/font = ExtResource("1_toupg")

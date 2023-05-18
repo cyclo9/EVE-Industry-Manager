@@ -1,0 +1,27 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="EVE Industry Manager"
+run/main_scene="res://scenes/eve_industry_manager.tscn"
+config/features=PackedStringArray("4.0", "Mobile")
+config/icon="res://assets/images/image.png"
+config/windows_native_icon="res://assets/images/image.ico"
+
+[display]
+
+window/size/viewport_width=608
+window/size/viewport_height=931
+window/stretch/mode="viewport"
+
+[rendering]
+
+renderer/rendering_method="mobile"

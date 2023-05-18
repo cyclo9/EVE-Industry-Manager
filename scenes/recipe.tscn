@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbvj0centdtaa"]
+
+[ext_resource type="Theme" uid="uid://clxof0dpu30ve" path="res://assets/themes/text.tres" id="1_36tep"]
+[ext_resource type="Texture2D" uid="uid://cit2fdwo3qrcy" path="res://assets/images/delete.png" id="1_ybe0h"]
+[ext_resource type="Script" path="res://scripts/Recipe/DeleteRecipe.gd" id="2_jwxsk"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 592.0
+offset_bottom = 48.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 8.0
+offset_right = 560.0
+offset_bottom = 40.0
+theme = ExtResource("1_36tep")
+text = "Label"
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 8.0
+offset_right = 592.0
+offset_bottom = 40.0
+theme = ExtResource("1_36tep")
+icon = ExtResource("1_ybe0h")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_jwxsk")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

@@ -31,27 +31,33 @@ func calc_mats_req(items_dict: Dictionary):
 	var stack: Array = []
 	for item in items_dict:
 		var target_file: String = '{}.json'.format({'': item.to_lower()})
-		var multiplier = items_dict[item]
+		var quantity = items_dict[item] # how many to make
+		var output: int # how many of the selected item is produced per run
 		if FileAccess.file_exists('user://data/recipes/{}'.format({'': target_file})):
 			stack.append(target_file)
 			var recipe = modules.json_to_dict(target_file)
-			for ingredient in recipe:
+			output = recipe['output'] # how many is made per run
+			for ingredient in recipe['Data']:
 				stack.append('{}.json'.format({'': ingredient}))
 		else:
 			print('Item(s) not found.')
 			
 		while stack:
-			var current_file = stack.pop_back()
+			var current_file = stack.pop_back() # select the last item in the stack
 			if FileAccess.file_exists('user://data/recipes/{}'.format({'': current_file})):
 				var current_ingredient = modules.title(current_file.split('.json')[0])
-				mats_req.erase(current_ingredient)
+				mats_req.erase(current_ingredient) # remove the current item from list of required materials
 				var recipe = modules.json_to_dict(current_file)
-				for ingredient in recipe:
+				for ingredient in recipe['Data']:
 					stack.append('{}.json'.format({'': ingredient}))
-					if mats_req.has(ingredient):
-						mats_req[ingredient] += int(recipe[ingredient]) * multiplier
+					var input = recipe['Data'][ingredient] # the amount of ingredients used to run 1 job of the selected item
+					var multiplier = input / output
+					var raw_amount = quantity * multiplier
+					var amount = input if raw_amount else ceil(raw_amount)
+					if mats_req.has(ingredient): # you want to add onto the existing sum of the same ingredient
+						mats_req[ingredient] += amount
 					else:
-						mats_req[ingredient] = int(recipe[ingredient]) * multiplier
+						mats_req[ingredient] = amount
 
 func calc_mats_missing():
 	mats_missing = {}

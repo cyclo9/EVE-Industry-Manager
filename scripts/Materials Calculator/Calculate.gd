@@ -36,7 +36,7 @@ func calc_mats_req(items_dict: Dictionary):
 		if FileAccess.file_exists('user://data/recipes/{}'.format({'': target_file})):
 			stack.append(target_file)
 			var recipe = modules.json_to_dict(target_file)
-			output = recipe['output'] # how many is made per run
+			output = recipe['Runs'] # how many is made per run
 			for ingredient in recipe['Data']:
 				stack.append('{}.json'.format({'': ingredient}))
 		else:
@@ -51,9 +51,8 @@ func calc_mats_req(items_dict: Dictionary):
 				for ingredient in recipe['Data']:
 					stack.append('{}.json'.format({'': ingredient}))
 					var input = recipe['Data'][ingredient] # the amount of ingredients used to run 1 job of the selected item
-					var multiplier = input / output
-					var raw_amount = quantity * multiplier
-					var amount = input if raw_amount else ceil(raw_amount)
+					var multiplier = ceil(float(quantity) / float(output))
+					var amount: int = input * multiplier
 					if mats_req.has(ingredient): # you want to add onto the existing sum of the same ingredient
 						mats_req[ingredient] += amount
 					else:

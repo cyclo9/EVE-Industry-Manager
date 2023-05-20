@@ -1,34 +1,37 @@
 extends LineEdit
 
-var ItemNameText
-var RecipeText
 var Dashboard
+var RecipeText
+var ItemNameText
+var RunsText
 
 signal add_recipe
 
 func _ready():
-	ItemNameText = get_node('../ItemNameText')
-	RecipeText = get_node('../RecipeText')
 	Dashboard = get_node("../../../../Dashboard")
+	RecipeText = get_node('../RecipeText')
+	ItemNameText = get_node('../ItemNameText')
+	RunsText = get_node('../RunsText')
 	
-func parse_recipe(recipe_text):
-	var content = recipe_text.split('\n')
+func parse_recipe(recipe_text: String) -> Dictionary:
+	var content: Array = recipe_text.split('\n')
 	# Eliminates the "Time per run" line
 	content.remove_at(0)
-	var recipe = {}
+	var recipe: Dictionary = {}
 	
 	for line in content:
 		var array = line.split(' x ')
 		if array.size() >= 2:
-			var item = array[1]
-			var quantity = array[0]
+			var item: String = array[1]
+			var quantity: int = int(array[0])
 			recipe[item] = quantity
 			
 	return recipe
 	
 func save_recipe():
-	var item_name = ItemNameText.text
 	var recipe = parse_recipe(RecipeText.text)
+	var item_name = ItemNameText.text
+	var runs = int(RunsText.text)
 
 	var dir = DirAccess.open('user://data/recipes')
 	# This prevents the application from saving no-name or no-content file
@@ -39,7 +42,11 @@ func save_recipe():
 		
 		var file = FileAccess.open('user://data/recipes/{item_name}.json'.format({'item_name': item_name.to_lower()}), FileAccess.WRITE)
 		if file:
-			file.store_string(JSON.stringify(recipe, '\t'))
+			var data: Dictionary = {
+				'Runs': runs,
+				'Data': recipe
+			}
+			file.store_string(JSON.stringify(data, '\t', false))
 			add_recipe.emit()
 			print('Recipe save successful.')
 		else:
@@ -51,6 +58,9 @@ func save_recipe():
 	RecipeText.set_text('')
 	
 func _on_save_recipe_pressed():
+	save_recipe()
+	
+func _on_runs_text_save_recipe():
 	save_recipe()
 
 func _unhandled_input(event):

@@ -7,7 +7,7 @@
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 592.0
+offset_right = 584.0
 offset_bottom = 48.0
 size_flags_vertical = 3
 
@@ -24,9 +24,9 @@ text_overrun_behavior = 3
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 560.0
+offset_left = 552.0
 offset_top = 8.0
-offset_right = 592.0
+offset_right = 584.0
 offset_bottom = 40.0
 theme = ExtResource("1_36tep")
 icon = ExtResource("1_ybe0h")

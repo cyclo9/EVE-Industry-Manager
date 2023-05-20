@@ -29,3 +29,6 @@ static func title(string: String) -> String:
 static func generate_id(weight: int, start: int, end: int):
 	var time = String.num(int(Time.get_unix_time_from_system()) * weight).split('')
 	return ''.join(time.slice(start, end))
+	
+static func mod(a, b):
+	return a - b * floor(a / b)

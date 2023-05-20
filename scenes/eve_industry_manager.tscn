@@ -1,13 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://ddjuscy0qft7h"]
+[gd_scene load_steps=7 format=3 uid="uid://evhqghqdrffq"]
 
-[ext_resource type="FontFile" uid="uid://deo1pnjujhkiy" path="res://assets/fonts/Fira Mono/FiraMono-Medium.ttf" id="1_00p4f"]
 [ext_resource type="Theme" uid="uid://clxof0dpu30ve" path="res://assets/themes/text.tres" id="2_pjyqq"]
 [ext_resource type="Script" path="res://scripts/Inventory/SaveInventory.gd" id="2_t56c6"]
-[ext_resource type="Script" path="res://scripts/Recipe/RunsText.gd" id="5_q6fxn"]
 [ext_resource type="Script" path="res://scripts/Recipe/LoadRecipes.gd" id="5_v3fgq"]
 [ext_resource type="Script" path="res://scripts/Materials Calculator/Calculate.gd" id="6_1fxkg"]
 [ext_resource type="Script" path="res://scripts/Recipe/SaveRecipe.gd" id="6_eoqdc"]
-[ext_resource type="Script" path="res://scripts/TextEdit.gd" id="9_2ixop"]
 
 [sub_resource type="GDScript" id="GDScript_evw1v"]
 script/source = "extends TabContainer
@@ -41,7 +38,7 @@ custom_minimum_size = Vector2(600, 900)
 layout_mode = 2
 
 [node name="Control" type="Control" parent="Dashboard"]
-custom_minimum_size = Vector2(600, 1400)
+custom_minimum_size = Vector2(600, 1350)
 layout_mode = 2
 theme = ExtResource("2_pjyqq")
 
@@ -54,7 +51,6 @@ offset_bottom = 257.0
 
 [node name="Label" type="Label" parent="Dashboard/Control/Inventory"]
 layout_mode = 0
-offset_left = -1.0
 offset_right = 551.0
 offset_bottom = 32.0
 theme = ExtResource("2_pjyqq")
@@ -79,7 +75,7 @@ anchors_preset = 0
 offset_left = 24.0
 offset_top = 289.0
 offset_right = 576.0
-offset_bottom = 577.0
+offset_bottom = 513.0
 
 [node name="RecipeLabel" type="Label" parent="Dashboard/Control/Recipe"]
 layout_mode = 0
@@ -100,63 +96,19 @@ offset_bottom = 223.0
 theme = ExtResource("2_pjyqq")
 placeholder_text = "Copy and paste the recipe of an item's blueprint"
 scroll_smooth = true
-script = ExtResource("9_2ixop")
-
-[node name="ItemNameLabel" type="Label" parent="Dashboard/Control/Recipe"]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 240.0
-offset_right = 121.0
-offset_bottom = 280.0
-theme = ExtResource("2_pjyqq")
-text = "Item:"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ItemNameText" type="LineEdit" parent="Dashboard/Control/Recipe"]
-layout_mode = 0
-offset_left = 128.0
-offset_top = 240.0
-offset_right = 352.0
-offset_bottom = 280.0
-theme = ExtResource("2_pjyqq")
-placeholder_text = "Blueprint Name"
 script = ExtResource("6_eoqdc")
-
-[node name="RunsText" type="LineEdit" parent="Dashboard/Control/Recipe"]
-layout_mode = 0
-offset_left = 360.0
-offset_top = 240.0
-offset_right = 406.375
-offset_bottom = 280.0
-text = "1"
-placeholder_text = "Runs"
-select_all_on_focus = true
-script = ExtResource("5_q6fxn")
-
-[node name="SaveButton" type="Button" parent="Dashboard/Control/Recipe"]
-layout_mode = 0
-offset_left = 416.0
-offset_top = 240.0
-offset_right = 472.0
-offset_bottom = 280.0
-theme = ExtResource("2_pjyqq")
-theme_override_fonts/font = ExtResource("1_00p4f")
-text = "Save"
 
 [node name="SelectItems" type="Control" parent="Dashboard/Control"]
 anchors_preset = 0
-offset_left = 27.0
-offset_top = 598.0
+offset_left = 24.0
+offset_top = 545.0
 offset_right = 576.0
-offset_bottom = 833.0
+offset_bottom = 769.0
 
-[node name="ItemLabel" type="Label" parent="Dashboard/Control/SelectItems"]
+[node name="ItemName" type="Label" parent="Dashboard/Control/SelectItems"]
 layout_mode = 0
-offset_left = 186.667
-offset_right = 354.667
-offset_bottom = 40.0
-rotation = -0.00151455
+offset_right = 552.0
+offset_bottom = 32.0
 theme = ExtResource("2_pjyqq")
 text = "Items to Manufacture"
 horizontal_alignment = 1
@@ -164,9 +116,9 @@ vertical_alignment = 1
 
 [node name="ItemText" type="TextEdit" parent="Dashboard/Control/SelectItems"]
 layout_mode = 0
-offset_top = 43.0
-offset_right = 549.0
-offset_bottom = 235.0
+offset_top = 32.0
+offset_right = 552.0
+offset_bottom = 224.0
 theme = ExtResource("2_pjyqq")
 placeholder_text = "e.g. 5 Oxygen Fuel Block"
 script = ExtResource("6_1fxkg")
@@ -174,9 +126,9 @@ script = ExtResource("6_1fxkg")
 [node name="MaterialsRequired" type="Control" parent="Dashboard/Control"]
 anchors_preset = 0
 offset_left = 24.0
-offset_top = 874.0
+offset_top = 801.0
 offset_right = 576.0
-offset_bottom = 1098.0
+offset_bottom = 1025.0
 
 [node name="MaterialsReqLabel" type="Label" parent="Dashboard/Control/MaterialsRequired"]
 layout_mode = 0
@@ -197,13 +149,13 @@ theme = ExtResource("2_pjyqq")
 placeholder_text = "Here are the materials required to make the selected item"
 editable = false
 scroll_smooth = true
-script = ExtResource("9_2ixop")
+script = ExtResource("6_eoqdc")
 
 [node name="MaterialsNeeded" type="Control" parent="Dashboard/Control"]
 anchors_preset = 0
-offset_top = 201.0
+offset_top = 129.0
 offset_right = 40.0
-offset_bottom = 241.0
+offset_bottom = 169.0
 
 [node name="MaterialsNeeded" type="Label" parent="Dashboard/Control/MaterialsNeeded"]
 layout_mode = 0
@@ -227,7 +179,7 @@ theme = ExtResource("2_pjyqq")
 placeholder_text = "Here are the materials missing to make the selected item"
 editable = false
 scroll_smooth = true
-script = ExtResource("9_2ixop")
+script = ExtResource("6_eoqdc")
 
 [node name="Recipes" type="ScrollContainer" parent="."]
 visible = false
@@ -242,11 +194,9 @@ script = ExtResource("5_v3fgq")
 [connection signal="mouse_entered" from="Dashboard/Control/Inventory/InventoryText" to="Dashboard/Control/Inventory/InventoryText" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Dashboard/Control/Inventory/InventoryText" to="Dashboard/Control/Inventory/InventoryText" method="_on_mouse_exited"]
 [connection signal="text_changed" from="Dashboard/Control/Inventory/InventoryText" to="Dashboard/Control/Inventory/InventoryText" method="_on_text_changed"]
+[connection signal="add_recipe" from="Dashboard/Control/Recipe/RecipeText" to="Recipes/Control" method="_on_add_recipe"]
 [connection signal="mouse_entered" from="Dashboard/Control/Recipe/RecipeText" to="Dashboard/Control/Recipe/RecipeText" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Dashboard/Control/Recipe/RecipeText" to="Dashboard/Control/Recipe/RecipeText" method="_on_mouse_exited"]
-[connection signal="add_recipe" from="Dashboard/Control/Recipe/ItemNameText" to="Recipes/Control" method="_on_add_recipe"]
-[connection signal="save_recipe" from="Dashboard/Control/Recipe/RunsText" to="Dashboard/Control/Recipe/ItemNameText" method="_on_runs_text_save_recipe"]
-[connection signal="pressed" from="Dashboard/Control/Recipe/SaveButton" to="Dashboard/Control/Recipe/ItemNameText" method="_on_save_recipe_pressed"]
 [connection signal="mouse_entered" from="Dashboard/Control/SelectItems/ItemText" to="Dashboard/Control/SelectItems/ItemText" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Dashboard/Control/SelectItems/ItemText" to="Dashboard/Control/SelectItems/ItemText" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="Dashboard/Control/MaterialsRequired/MaterialsReqText" to="Dashboard/Control/MaterialsRequired/MaterialsReqText" method="_on_mouse_entered"]

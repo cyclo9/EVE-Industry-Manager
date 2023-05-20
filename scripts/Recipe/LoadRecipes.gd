@@ -19,7 +19,7 @@ func load_recipes():
 		var recipes_list = dir.get_files()
 		var num_recipes: int = recipes_list.size()
 		# expands the Control node to fit all the recipes
-		set_custom_minimum_size(Vector2(0, (num_recipes * 48)))
+		set_custom_minimum_size(Vector2(0, (num_recipes * 55)))
 		for i in recipes_list.size():
 			# get the recipe name
 			var recipe_name = recipes_list[i].split('.json')[0]

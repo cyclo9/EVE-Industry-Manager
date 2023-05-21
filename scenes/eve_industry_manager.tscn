@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://evhqghqdrffq"]
+[gd_scene load_steps=8 format=3 uid="uid://evhqghqdrffq"]
 
 [ext_resource type="Theme" uid="uid://clxof0dpu30ve" path="res://assets/themes/text.tres" id="2_pjyqq"]
 [ext_resource type="Script" path="res://scripts/Inventory/SaveInventory.gd" id="2_t56c6"]
+[ext_resource type="Script" path="res://scripts/TextEdit.gd" id="5_8keef"]
 [ext_resource type="Script" path="res://scripts/Recipe/LoadRecipes.gd" id="5_v3fgq"]
 [ext_resource type="Script" path="res://scripts/Materials Calculator/Calculate.gd" id="6_1fxkg"]
 [ext_resource type="Script" path="res://scripts/Recipe/SaveRecipe.gd" id="6_eoqdc"]
@@ -19,9 +20,9 @@ func _ready():
 		dir.make_dir('user://data')
 
 	if dir.dir_exists('user://data/recipes'):
-		print('\\'recipes\\' folder found.')
+		print('\\'data/recipes\\' folder found.')
 	else:
-		print('\\'recipes\\' not found. Creating...')
+		print('\\'data/recipes\\' not found. Creating...')
 		dir.make_dir('user://data/recipes')
 
 	print()
@@ -149,7 +150,7 @@ theme = ExtResource("2_pjyqq")
 placeholder_text = "Here are the materials required to make the selected item"
 editable = false
 scroll_smooth = true
-script = ExtResource("6_eoqdc")
+script = ExtResource("5_8keef")
 
 [node name="MaterialsNeeded" type="Control" parent="Dashboard/Control"]
 anchors_preset = 0
@@ -179,7 +180,7 @@ theme = ExtResource("2_pjyqq")
 placeholder_text = "Here are the materials missing to make the selected item"
 editable = false
 scroll_smooth = true
-script = ExtResource("6_eoqdc")
+script = ExtResource("5_8keef")
 
 [node name="Recipes" type="ScrollContainer" parent="."]
 visible = false
@@ -200,6 +201,5 @@ script = ExtResource("5_v3fgq")
 [connection signal="mouse_entered" from="Dashboard/Control/SelectItems/ItemText" to="Dashboard/Control/SelectItems/ItemText" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Dashboard/Control/SelectItems/ItemText" to="Dashboard/Control/SelectItems/ItemText" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="Dashboard/Control/MaterialsRequired/MaterialsReqText" to="Dashboard/Control/MaterialsRequired/MaterialsReqText" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Dashboard/Control/MaterialsRequired/MaterialsReqText" to="Dashboard/Control/MaterialsRequired/MaterialsReqText" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="Dashboard/Control/MaterialsNeeded/MaterialsNeededText" to="Dashboard/Control/MaterialsNeeded/MaterialsNeededText" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Dashboard/Control/MaterialsNeeded/MaterialsNeededText" to="Dashboard/Control/MaterialsNeeded/MaterialsNeededText" method="_on_mouse_exited"]
